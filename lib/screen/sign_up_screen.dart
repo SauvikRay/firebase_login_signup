@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Image.asset('assets/images/s.jpg',height: 100,width: 100,),
+                  Image.asset('assets/images/s.png',height: 200,width: 200,),
                   const SizedBox(height: 20,),
                    TextFormField(
                     decoration:  InputDecoration(
