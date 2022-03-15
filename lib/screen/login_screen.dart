@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sign_up_login/screen/sign_up_screen.dart';
 
 class LogInScreen extends StatefulWidget {
-  const LogInScreen({
-    Key? key,
-  }) : super(key: key);
+  const LogInScreen({Key? key,}) : super(key: key);
+
+    static const routeName= '/login';
   @override
   State<LogInScreen> createState() => _LogInScreenState();
 }
@@ -12,6 +13,9 @@ class _LogInScreenState extends State<LogInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailFocuseNode = FocusNode();
   final _passwordFocuseNode = FocusNode();
+  //controller
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   
 
@@ -23,13 +27,13 @@ class _LogInScreenState extends State<LogInScreen> {
           height: double.infinity,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Color(0xFF4FD3C4),
-              Color(0xFF488FB1),
+            const  Color(0xFF4FD3C4).withOpacity(0.5),
+              const Color(0xFF488FB1).withOpacity(0.8),
             ],
           )),
           child: Form(
@@ -72,10 +76,14 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
                   focusNode: _emailFocuseNode,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocuseNode);
+                  },
+                  onSaved: (value){
+                    _emailController.value;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -104,6 +112,10 @@ class _LogInScreenState extends State<LogInScreen> {
                   keyboardType: TextInputType.visiblePassword,
                   focusNode: _passwordFocuseNode,
                   textInputAction: TextInputAction.done,
+                  controller: _passwordController,
+                  onSaved: (value){
+                    _passwordController.value;
+                  },
                 ),
                 const SizedBox(height: 20),
                 const SizedBox(
@@ -131,10 +143,14 @@ class _LogInScreenState extends State<LogInScreen> {
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const[
-                 Text('Dont have an account? ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.white),),
-                 Text('Signup',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),
-                ),
+                children: [
+                const Text('Dont have an account? ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.white),),
+                 TextButton(
+                   child:const Text('Signup',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
+                 onPressed: (){
+                   Navigator.pushNamed(context,SignUpScreen.routeName);
+                 },
+                 ),
               ],)
               
               ],

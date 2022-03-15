@@ -2,17 +2,30 @@ import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key,}) : super(key: key);
+  
+  static const routeName= '/sign-up';
+
+  
+   
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  
   final _formKey = GlobalKey<FormState>();
  
   final _lastNameFocuseNode = FocusNode();
   final _emailFocuseNode = FocusNode();
   final _passwordFocuseNode = FocusNode();
   final _confirmPasswordFocuseNode = FocusNode();
+
+    //controller
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordCtroller = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   
 
   @override
@@ -26,13 +39,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: double.infinity,
           width: double.infinity,
           padding:const  EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-          decoration:const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
             colors: [
-              Color(0xFF4FD3C4),
-              Color(0xFF488FB1),
+             const  Color(0xFF4FD3C4).withOpacity(0.5),
+              const Color(0xFF488FB1).withOpacity(0.8),
             ],
           )),
          
@@ -67,6 +80,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     style: Theme.of(context).textTheme.headline2,
                     keyboardType:TextInputType.text,
                     textInputAction: TextInputAction.next,
+                    controller: _firstNameController,
+                    onSaved: (value){
+                      _firstNameController.value;
+                    },
                     onFieldSubmitted: (_){
                       FocusScope.of(context).requestFocus(_lastNameFocuseNode);
                     },
@@ -95,6 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.text,
                     focusNode: _lastNameFocuseNode,
                     textInputAction: TextInputAction.next,
+                    controller: _lastNameController,
+                    onSaved: (value){
+                      _lastNameController.value;
+                    },
                      onFieldSubmitted: (_){
                       FocusScope.of(context).requestFocus(_emailFocuseNode);
                     },
@@ -124,6 +145,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _emailFocuseNode,
                     textInputAction: TextInputAction.next,
+                    controller: _emailController,
+                    onSaved: (value){
+                      _emailController.value;
+                    },
                      onFieldSubmitted: (_){
                       FocusScope.of(context).requestFocus(_passwordFocuseNode);
                     },
@@ -154,6 +179,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.visiblePassword,
                     focusNode: _passwordFocuseNode,
                     textInputAction: TextInputAction.next,
+                    controller: _passwordCtroller,
+                    onSaved: (value){
+                      _passwordCtroller.value;
+                    },
                      onFieldSubmitted: (_){
                       FocusScope.of(context).requestFocus(_confirmPasswordFocuseNode);
                     },
@@ -185,6 +214,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.visiblePassword,
                     focusNode: _confirmPasswordFocuseNode,
                       textInputAction: TextInputAction.done,
+                      controller: _confirmPasswordController,
+                    onSaved: (value){
+                      _confirmPasswordController.value;
+                    },
+                     onFieldSubmitted: (_){
+                      FocusScope.of(context).requestFocus(_confirmPasswordFocuseNode);
+                    },
             
                   ),
             
